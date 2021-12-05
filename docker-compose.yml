@@ -15,13 +15,25 @@ services:
     build:
       context: ./
       dockerfile: docker/api/Dockerfile
-    working_dir: /app/devastometer
+    working_dir: /app/api
     depends_on:
       - mysql
     environment:
       - MYSQL_DSN=mysql://root:123asdf@mysql:3306/devastometer?serverVersion=5.7&charset=UTF8
     volumes:
-      - ./api/:/app/devastometer
+      - ./api/:/app/api
+
+  parser:
+    build:
+      context: ./
+      dockerfile: docker/parser/Dockerfile
+    working_dir: /app/parser
+    depends_on:
+      - mysql
+    environment:
+      - MYSQL_DSN=mysql://root:123asdf@mysql:3306/devastometer?serverVersion=5.7&charset=UTF8
+    volumes:
+      - ./parser/:/app/parser
 
   mysql:
     image: percona:8.0.15-5-centos

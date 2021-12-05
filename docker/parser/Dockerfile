@@ -1,6 +1,6 @@
 FROM php:8.1.0-fpm-alpine3.15
 
-WORKDIR /app/api
+WORKDIR /app/parser
 
 #install composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
