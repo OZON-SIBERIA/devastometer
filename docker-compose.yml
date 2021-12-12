@@ -8,32 +8,27 @@ services:
     depends_on:
       - api
     volumes:
-      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-    command: /bin/sh -c "exec nginx -g 'daemon off;'"
+      - ./api/docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
 
   api:
     build:
       context: ./
-      dockerfile: docker/api/Dockerfile
-    working_dir: /app/api
+      dockerfile: api/docker/app/Dockerfile
+    working_dir: /app
     depends_on:
       - mysql
     environment:
       - MYSQL_DSN=mysql://root:123asdf@mysql:3306/devastometer?serverVersion=5.7&charset=UTF8
     volumes:
-      - ./api/:/app/api
+      - ./api/:/app
 
   parser:
     build:
       context: ./
-      dockerfile: docker/parser/Dockerfile
-    working_dir: /app/parser
-    depends_on:
-      - mysql
-    environment:
-      - MYSQL_DSN=mysql://root:123asdf@mysql:3306/devastometer?serverVersion=5.7&charset=UTF8
+      dockerfile: parser/docker/app/Dockerfile
+    working_dir: /app
     volumes:
-      - ./parser/:/app/parser
+      - ./parser/:/app
 
   mysql:
     image: percona:8.0.15-5-centos
