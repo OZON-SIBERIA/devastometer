@@ -9,7 +9,7 @@ RUN php -r "unlink('composer-setup.php');"
 RUN mkdir -p /usr/local/bin
 RUN mv composer.phar /usr/local/bin/composer
 
-#COPY ./../../composer.json composer.json
-#RUN composer install
+COPY ./api/composer.json composer.json
+RUN composer install
 
 RUN docker-php-ext-install pdo_mysql
