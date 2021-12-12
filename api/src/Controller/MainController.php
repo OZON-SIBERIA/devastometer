@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController
 {
     /**
-     * @Route("/main/`", name="main", methods={"POST", "GET"})
+     * @Route("/main", name="main", methods={"POST", "GET"})
      * @param Request $request
      * @return Response
      */
